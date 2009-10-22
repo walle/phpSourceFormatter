@@ -34,6 +34,13 @@ abstract class Indenter
   protected $indention;
 
   /**
+   *
+   * @var string Interally used to lessen the need for for loops in getIndention. Used by the utility function
+   * @access private
+   */
+  private $indentionStr;
+
+  /**
    * Uses all the variable to determine the correct indention string
    *
    * @return string Returns the indention
@@ -60,6 +67,7 @@ abstract class Indenter
   public function indent()
   {
     $this->indention++;
+    $this->indentionStr = $this->getIndention();
   }
 
   /**
@@ -70,6 +78,18 @@ abstract class Indenter
     if ($this->indention > 0)
     {
       $this->indention--;
+      $this->indentionStr = $this->getIndention();
     }
+  }
+
+  /**
+   * Utility function for getting text with indention
+   *
+   * @param string $str
+   * @return string Returns the indented string
+   */
+  public function getStr($str)
+  {
+    return $this->indentionStr.$str;
   }
 }
